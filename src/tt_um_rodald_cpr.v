@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module tt_um_rodald_cpr (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
