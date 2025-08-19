@@ -32,7 +32,6 @@ project:
     - "ShiftLeft1.v"
     - "SignExt.v"
     - "StateCounter.v"
-    - "tt_um_rodald_wrapper.v"
     - "SimpleMemory.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.

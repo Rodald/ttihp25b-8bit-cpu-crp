@@ -24,11 +24,12 @@ async def test_project(dut):
 
     print(dir(dut))
 
+
 async def reset_dut(dut):
     dut.clk.value = 1
     dut.rst_n.value = 0
     clock = Clock(dut.clk, 10, units="ns")
-    cocotb.start_soon(clock.start())
+    await cocotb.start_soon(clock.start())
     await Timer(15, units="ns")
     dut.rst_n.value = 1
     dut._log.info("Reset abgeschlossen")

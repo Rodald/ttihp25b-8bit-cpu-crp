@@ -24,7 +24,7 @@ module tb ();
   wire [7:0] uio_oe;
 
   // Replace tt_um_example with your module name:
-  tt_um_rodald_wrapper user_project (
+  tt_um_rodald_cpr user_project (
       .ui_in  (ui_in),    // Dedicated inputs
       .uo_out (uo_out),   // Dedicated outputs
       .uio_in (uio_in),   // IOs: Input path
@@ -33,6 +33,17 @@ module tb ();
       .ena    (ena),      // enable - goes high when design is selected
       .clk    (clk),      // clock
       .rst_n  (rst_n)     // not reset
+  );
+
+  SimpleMemory #(
+      .ADDR_WIDTH(15),
+      .DATA_WIDTH(8)
+  ) mem (
+      .clk(clk),
+      .reset(~rst_n),
+      .memWriteReq(uio_out[7]),
+      .memReqBus({uio_out[6:0], uo_out}),
+      .read_data(ui_in)
   );
 
 endmodule
