@@ -5,7 +5,7 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = tt_um_rodald_cpr.v ALU.v ALUDec.v CRP.v Controller.v Datapath.v MainDec.v Mux2.v Mux4.v Reg16ByteWrite.v Register.v RegisterFile.v ShiftLeft1.v SignExt.v StateCounter.v SimpleMemory.v tt_um_rodald_wrapper.v
+PROJECT_SOURCES = tt_um_rodald_wrapper.v tt_um_rodald_cpr.v ALU.v ALUDec.v CRP.v Controller.v Datapath.v MainDec.v Mux2.v Mux4.v Reg16ByteWrite.v Register.v RegisterFile.v ShiftLeft1.v SignExt.v StateCounter.v SimpleMemory.v
 
 ifneq ($(GATES),yes)
 

@@ -33,13 +33,13 @@ class SimpleMemory:
 
 @cocotb.test()
 async def test_project(dut):
+    print(dir(dut))
     dut._log.info("Start")
     dut.clk.value = 1
 
     # Set the clock period to 10 us (100 KHz)
     clock = Clock(dut.clk, 5, units="ns")
     cocotb.start_soon(clock.start())
-
     dut._log.info("Test project behavior")
 
     # Set the input values you want to test
