@@ -35,15 +35,4 @@ module tb ();
       .rst_n  (rst_n)     // not reset
   );
 
-  SimpleMemory #(
-      .ADDR_WIDTH(15),
-      .DATA_WIDTH(8)
-  ) mem (
-      .clk(clk),
-      .reset(~rst_n),
-      .memWriteReq(uio_out[7]),
-      .memReqBus({uio_out[6:0], uo_out}),
-      .read_data(ui_in)
-  );
-
 endmodule
