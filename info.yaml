@@ -1,9 +1,9 @@
 # Tiny Tapeout project information
 project:
-  title:        "8-Bit CRP CPU"      # Project title
+  title:        "CRP - Custom Risc Processor"      # Project title
   author:       "David Polt"      # Your name
   discord:      "Rodald"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "A simple processor for a school project"      # One line description of what your project does
+  description:  "An 8-bit processor implementing a custom RISC architecture"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     50_000_000       # Clock frequency in Hz (or 0 if not applicable)
 
