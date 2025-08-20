@@ -20,20 +20,15 @@ class SimpleMemory:
         self.mem = [None for _ in range(self.MEM_DEPTH)]
         self.writeState = 0
 
-    def tick(self, clk, reset, memWriteReq, memReqBus):
-        if reset:
-            self.reset()
-        elif memWriteReq:
-            self.writeDataReg = memReqBus & 0xFF
-            self.writeState = 1
-        elif self.writeState:
-            self.mem[memReqBus] = self.writeDataReg
-            self.writeState = 0
+    async def load_file(self, filename):
+        with open(filename, "r") as f:
+            for addr, line in enumerate(f):
+                if addr < self.MEM_DEPTH:
+                    try:
+                        self.mem[addr] = int(line.strip(), 2)
+                    except ValueError:
+                        pass
 
-    def read(self, memReqBus):
-        if self.mem[memReqBus] is None:
-            return 0
-        return self.mem[memReqBus]
 
 
 @cocotb.test()
@@ -43,7 +38,7 @@ async def test_project(dut):
     dut.rst_n.value = 0
 
     # Set the clock period to 10 us (100 KHz)
-    clock = Clock(dut.clk, 10, units="ns")
+    clock = Clock(dut.clk, 20, units="ns")
     cocotb.start_soon(clock.start())
 
     await Timer(15, units="ns")
@@ -71,7 +66,7 @@ async def test_project(dut):
 async def run_test(dut, test_name, memory):
     dut.clk.value = 1
     dut.rst_n.value = 0
-    clock = Clock(dut.clk, 10, units="ns")
+    clock = Clock(dut.clk, 20, units="ns")
     cocotb.start_soon(clock.start())
 
     await Timer(15, units="ns")
@@ -82,3 +77,12 @@ async def run_test(dut, test_name, memory):
     await memory.load_file(filename)
 
     await ClockCycles(dut.clk, 25)
+
+
+@cocotb.test()
+async def test_add(dut):
+    mem = SimpleMemory(dut, depth=1 << 15)
+
+    await run_test(dut, "testAdd", mem)
+
+    dut._log.info(f"Register Output: {dut.some_output.value}")
