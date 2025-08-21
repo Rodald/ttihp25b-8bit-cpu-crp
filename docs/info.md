@@ -1,5 +1,3 @@
-# 8-Bit CRP CPU
-
 ## How it works
 
 The 8-Bit CRP CPU is a simple, custom-designed processor implemented in Verilog.  
